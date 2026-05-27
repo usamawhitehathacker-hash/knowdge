@@ -1,0 +1,282 @@
+🎓 SHOPIFY THEME EXPERT MENTOR — Haazir Hoon!
+Assalam-o-Alaikum! Main tumhara World-Class Shopify Theme Architect Mentor hoon.
+
+Tumne abhi jo poora system padha hai — yeh ek complete map hai Shopify theme ka. Ab tum iss map ke kisi bhi hisse ke baare mein mujhse pooch sakte ho, aur main tumhe expert level pe samjhaunga.
+
+Mera Teaching Style:
+Step	Kya karunga
+1	Big Picture — pehle overview dunga
+2	Real Example — code ya analogy se samjhaunga
+3	Connection Map — kaun si file kisse judi, dikhaunga
+4	IF-THEN Logic — agar yeh karo toh kya hoga
+5	Common Mistakes — galtiyon se bachaunga
+6	Practice Task — haath se seekhne ke liye
+Ab Tumhari Baari:
+Mujhe batao:
+
+TOPIC: [Kya samajhna hai — e.g., "sections kaise kaam karti hain"]
+LEVEL: [Beginner / Intermediate / Advanced]
+CONTEXT: [Abhi kya kar rahe ho — e.g., "main apna pehla theme bana raha hoon"]
+CONFUSION: [Exactly kya samajh nahi aaya]
+Ya phir seedha koi sawaal puchho jaise:
+"Mentor, theme.liquid ka kaam kya hai detail mein?"
+"Mentor, main ek custom section banana chahta hoon — guide karo"
+"Mentor, JSON templates aur liquid templates mein farq kya hai?"
+"Mentor, Dawn theme ka color scheme system samjhao"
+"Mentor, meri section mein error aa raha hai — yeh raha code"
+Main har jawab mein WHY samjhaunga — sirf kya karna hai nahi, kyun karna hai bhi bataunga. Kyunki jab tum "kyun" samajh jaate ho, toh tum khud naye problems solve kar sakte ho.
+
+Puchho jo puchhna hai — main haazir hoon! 🧠
+
+Est. Credits Used: 0.06
+
+Elapsed Time: 18s
+
+📁 FOLDER 1: layout/ (2 Files)
+#	File Name	Category	Kya Karta Hai	Kab Use Hota Hai	Kahan Kaam Aata Hai	Kyun Need Hai	Kisse Connected Hai
+1	theme.liquid	Main Layout	Poori website ka master wrapper — HTML <head> aur <body> define karta hai. CSS, JS, fonts load karta hai. Header-group, footer-group, main content sab yahi se call hote hain	HAR page pe — home, product, collection, cart, blog, search — sab	Har ek page jab load hota hai, pehle yeh file chalta hai	Bina iske koi page render nahi hoga. Yeh ghar ka foundation hai — walls, roof, floor	snippets/stylesheets.liquid, snippets/fonts.liquid, snippets/scripts.liquid, snippets/theme-styles-variables.liquid, snippets/color-schemes.liquid, snippets/meta-tags.liquid, sections/header-group.json, sections/footer-group.json, snippets/search-modal.liquid, snippets/quick-add-modal.liquid, snippets/skip-to-content-link.liquid, snippets/theme-editor.liquid, ALL templates (via content_for_layout)
+2	password.liquid	Password Layout	Jab store bnd ho (password protected) tab yeh layout use hota hai theme.liquid ke bajaye	Sirf tab jab store password-protected ho	Store launch se pehle ya temporarily bnd hone pe	Store bnd hone pe bhi customer ko ek page dikhana hai — ugly error nahi	sections/password.liquid, sections/password-footer.liquid, basic CSS/JS
+
+Kiro
+
+📁 FOLDER 1: layout/ — COMPLETE EXPERT BREAKDOWN
+🏗️ Big Picture — Layout Folder Kya Hai?
+Layout folder ko samjho jaise ghar ka foundation + walls + roof. Yeh woh structure hai jiske andar sab kuch rehta hai. Bina layout ke, koi bhi page exist nahi kar sakta.
+
+Layout = Ghar ka baahri dhanca
+Templates = Kamre
+Sections = Saman
+Snippets = Chhoti cheezein
+
+Agar layout nahi → Ghar hi nahi → Kamre kahan rakhoge?
+📄 FILE 1: theme.liquid — THE KING FILE 👑
+Simple Explanation:
+theme.liquid Shopify theme ki sabse powerful file hai. Yeh har page ka master wrapper hai. Jab bhi koi customer tumhara store open karta hai — chahe home page ho, product page ho, cart ho — pehle theme.liquid chalta hai, phir uske andar baaki content load hota hai.
+
+Socho aise: TV ka frame theme.liquid hai, aur jo channel chal raha hai woh template/section hai.
+
+🔗 Connection Diagram:
+theme.liquid (MASTER FILE)
+│
+├─── <head> section:
+│    ├── snippets/meta-tags.liquid          → SEO tags, og:image, title
+│    ├── snippets/stylesheets.liquid        → Saari CSS files load
+│    ├── snippets/fonts.liquid              → Google/custom fonts
+│    ├── snippets/theme-styles-variables.liquid → CSS variables (colors, spacing)
+│    ├── snippets/color-schemes.liquid      → Color scheme definitions
+│    └── {{ content_for_header }}           → Shopify ka apna code (analytics, scripts)
+│
+├─── <body> start:
+│    ├── snippets/skip-to-content-link.liquid → Accessibility ke liye
+│    ├── snippets/theme-editor.liquid        → Theme editor helper code
+│    ├── sections/header-group.json         → Header + Announcement bar
+│    │    ├── sections/announcement-bar.liquid
+│    │    └── sections/header.liquid
+│    │         ├── snippets/icon-*.liquid
+│    │         ├── snippets/cart-icon.liquid
+│    │         └── snippets/search-modal.liquid
+│    │
+│    ├── {{ content_for_layout }}           → · YAHAN ACTUAL PAGE AATA HAI
+│    │    ├── templates/index.json          (home page)
+│    │    ├── templates/product.json        (product page)
+│    │    ├── templates/collection.json     (collection page)
+│    │    ├── templates/cart.json           (cart page)
+│    │    └── templates/*.json              (koi bhi page)
+│    │
+│    ├── sections/footer-group.json         → Footer sections
+│    │    └── sections/footer.liquid
+│    │
+│    ├── snippets/quick-add-modal.liquid    → Quick add to cart popup
+│    ├── snippets/search-modal.liquid       → Search overlay
+│    └── snippets/scripts.liquid            → JavaScript files load
+│
+└─── </body></html>
+
+TOTAL DIRECT CONNECTIONS: 15-20+ files
+INDIRECT CONNECTIONS: 50+ files (through templates → sections → snippets)
+🧠 IF-THEN Logic:
+IF (Yeh Karo)	THEN (Yeh Hoga)	WHY (Kyun)
+theme.liquid mein font change kiya	Poori website pe font badal jayega	Har page is file se guzarta hai
+theme.liquid delete kar diya	Poora store crash — kuch nahi dikhega	Shopify ko wrapper chahiye render ke liye
+{{ content_for_header }} remove kiya	Analytics, Shopify scripts, cart sab band	Shopify apna zaroori code yahan inject karta hai
+{{ content_for_layout }} remove kiya	Page ka content gayab — sirf header/footer dikhega	Yeh line actual template content ko call karti hai
+Header-group ki line remove ki	Saari pages se header gayab ho jayega	Header yahan se render ho raha tha
+Naya snippet render kiya ({% render 'xyz' %})	Har page pe woh snippet dikhega	theme.liquid = global file
+CSS file ka link remove kiya	Styling toot jayegi — ugly page dikhega	Styles yahan se load ho rahi thi
+JavaScript remove kiya	Interactive features band (cart, menu, search)	JS yahan se load ho raha tha
+🧱 theme.liquid Ka Simplified Structure:
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <!-- META TAGS -->
+  {% render 'meta-tags' %}
+  
+  <!-- CSS LOAD -->
+  {% render 'stylesheets' %}
+  
+  <!-- FONTS LOAD -->
+  {% render 'fonts' %}
+  
+  <!-- THEME VARIABLES (colors, spacing) -->
+  {% render 'theme-styles-variables' %}
+  {% render 'color-schemes' %}
+  
+  <!-- SHOPIFY KA APNA CODE -->
+  {{ content_for_header }}
+</head>
+
+<body>
+  <!-- ACCESSIBILITY -->
+  {% render 'skip-to-content-link' %}
+  
+  <!-- HEADER (announcement + navigation) -->
+  {% sections 'header-group' %}
+  
+  <!-- · ACTUAL PAGE CONTENT YAHAN AATA HAI · -->
+  <main id="MainContent">
+    {{ content_for_layout }}
+  </main>
+  
+  <!-- FOOTER -->
+  {% sections 'footer-group' %}
+  
+  <!-- MODALS (search, quick-add) -->
+  {% render 'search-modal' %}
+  {% render 'quick-add-modal' %}
+  
+  <!-- JAVASCRIPT LOAD -->
+  {% render 'scripts' %}
+  
+  <!-- THEME EDITOR HELPER -->
+  {% render 'theme-editor' %}
+</body>
+</html>
+🎯 Kya Kar Sakte Ho theme.liquid Ke Saath:
+Action	Example
+Global announcement banner add karna	Body start mein ek div add karo
+Custom font load karna	<head> mein font link add karo
+Analytics script add karna	Body end pe script tag add karo
+Popup/modal globally add karna	Footer ke baad render karo
+Loading animation add karna	Body start mein loader div
+WhatsApp floating button	Body end pe fixed position button
+Custom CSS globally	<head> mein style tag ya CSS file link
+⚠️ Common Mistakes:
+✗ MISTAKE 1: content_for_header remove karna
+   → Shopify analytics, checkout, cart sab toot jayega
+
+✗ MISTAKE 2: content_for_layout remove karna
+   → Page ka content hi nahi dikhega
+
+✗ MISTAKE 3: Zyada heavy JS yahan load karna
+   → Poori site slow ho jayegi (har page pe load hoga)
+
+✗ MISTAKE 4: Inline CSS bahut zyada likhna
+   → Page size badh jayega, caching ka fayda nahi milega
+
+✓ CORRECT: Snippets use karo — code organized rahe
+✓ CORRECT: Critical CSS inline, baki deferred
+✓ CORRECT: JS ko defer/async se load karo
+📄 FILE 2: password.liquid — THE GUARD FILE 🔒
+Simple Explanation:
+password.liquid ek backup layout hai jo sirf tab kaam aata hai jab store password-protected ho. Jaise theme.liquid har normal page ka wrapper hai, waise hi password.liquid sirf password page ka wrapper hai.
+
+Socho aise: Ghar pe tala laga hai — bahar se sirf ek board dikhai de raha hai "Jaldi aa rahe hain". Woh board = password.liquid.
+
+🔗 Connection Diagram:
+password.liquid (PASSWORD LAYOUT)
+│
+├─── <head>:
+│    ├── Basic CSS (minimal styling)
+│    ├── Basic fonts
+│    └── {{ content_for_header }} → Shopify essentials
+│
+├─── <body>:
+│    ├── sections/password.liquid
+│    │    ├── Store logo
+│    │    ├── "Opening Soon" message
+│    │    ├── Password input field
+│    │    ├── Email signup (optional)
+│    │    └── Store owner login link
+│    │
+│    └── sections/password-footer.liquid
+│         ├── Social media links
+│         └── Copyright text
+│
+└─── </body></html>
+
+TOTAL CONNECTIONS: 3-5 files (bahut simple)
+🧠 IF-THEN Logic:
+IF (Yeh Karo)	THEN (Yeh Hoga)	WHY (Kyun)
+password.liquid delete kiya	Password page ugly/broken dikhega	Shopify ko is page ka bhi layout chahiye
+password.liquid mein branding add ki	Password page professional dikhega	First impression — customer launch se pehle dekhta hai
+Store password enable kiya (settings mein)	theme.liquid ki jagah password.liquid use hoga	Shopify automatically switch karta hai
+Store live kiya (password remove)	password.liquid ab kaam nahi aayega	Ab theme.liquid takeover karta hai
+🧱 password.liquid Ka Simplified Structure:
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ shop.name }}</title>
+  
+  <!-- MINIMAL CSS -->
+  {{ 'password.css' | asset_url | stylesheet_tag }}
+  
+  {{ content_for_header }}
+</head>
+
+<body>
+  <!-- PASSWORD PAGE CONTENT -->
+  {% section 'password' %}
+  
+  <!-- PASSWORD FOOTER -->
+  {% section 'password-footer' %}
+</body>
+</html>
+🎯 Kya Kar Sakte Ho password.liquid Ke Saath:
+Action	Example
+Coming Soon page design karna	Custom branding + countdown timer
+Email signup add karna	Launch se pehle emails collect karo
+Social links dikhana	Instagram/Facebook promote karo
+Custom animation/video background	Attractive landing page banao
+Brand story dikhana	About section add karo
+⚠️ Common Mistakes:
+✗ MISTAKE 1: password.liquid mein heavy features daalna
+   → Yeh temporary page hai — simple rakho
+
+✗ MISTAKE 2: password.liquid ignore karna
+   → Store bnd hone pe ugly page dikhega — unprofessional
+
+✗ MISTAKE 3: theme.liquid ka code copy paste karna
+   → Unnecessary bloat — password page ko header/footer nahi chahiye full wala
+
+✓ CORRECT: Clean, minimal, branded design
+✓ CORRECT: Email signup for marketing
+✓ CORRECT: Social proof elements (coming soon vibe)
+▪ DONO FILES KA COMPARISON:
+Feature	theme.liquid	password.liquid
+Kab chalta hai	Har normal page pe	Sirf password-protected store pe
+Connections	15-20+ direct, 50+ indirect	3-5 files
+Complexity	HIGH — poora system yahan se	LOW — simple page
+Delete karo toh	POORA STORE CRASH	Sirf password page break
+Modify karo toh	GLOBAL EFFECT — sab jagah	Sirf password page pe effect
+Priority	● CRITICAL	🟡 Important but simple
+Merchant touch karta hai?	Rarely directly	Rarely
+Developer importance	DAILY USE	Setup time only
+🧪 Practice Task:
+Task 1: Apne theme.liquid mein identify karo — {{ content_for_layout }} kahan hai? Usse remove karke preview dekho (kya hota hai?) phir wapas add karo.
+
+Task 2: password.liquid mein ek countdown timer add karo jo store launch date dikhaye.
+
+Task 3: theme.liquid mein ek floating WhatsApp button add karo jo har page pe dikhe.
+
+❓ Kya Samajh Aaya? Koi Sawaal?
+Puchho mujhse:
+
+"Mentor, {{ content_for_header }} exactly kya inject karta hai?"
+"Mentor, {% sections 'header-group' %} aur {% section 'header' %} mein farq?"
+"Mentor, main theme.liquid mein koi custom code add karna chahta hoon — kahan add karoon?"
+Main haazir hoon! 🧠
+
+
+
+
+
